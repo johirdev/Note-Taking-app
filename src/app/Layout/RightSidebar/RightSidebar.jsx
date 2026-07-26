@@ -5,8 +5,6 @@ import React, { useContext } from "react";
 
 export const RightSidebar = () => {
   const { token, userData, logOut } = useContext(GlobalData);
-
-
   return (
     <>
       <>
@@ -105,53 +103,6 @@ export const RightSidebar = () => {
                   />{" "}
                   role- {userData?.role || "user"}
                 </div>
-              </div>
-
-              {/* Stats */}
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr 1fr",
-                  gap: "8px",
-                  padding: "16px 20px",
-                  borderBottom: "1px solid rgba(255,255,255,0.06)",
-                }}
-              >
-                {[
-                  ["24", "Posts"],
-                  ["3", "Note"],
-                  ["47", "Days"],
-                ].map(([n, l]) => (
-                  <div
-                    key={l}
-                    style={{
-                      textAlign: "center",
-                      padding: "10px 6px",
-                      background: "rgba(255,255,255,0.03)",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontSize: "18px",
-                        fontWeight: 700,
-                        color: "#a78bfa",
-                        fontFamily: "'JetBrains Mono', monospace",
-                      }}
-                    >
-                      {n}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "10px",
-                        color: "rgba(255,255,255,0.3)",
-                        marginTop: "3px",
-                      }}
-                    >
-                      {l}
-                    </div>
-                  </div>
-                ))}
               </div>
 
               {/* Interests */}

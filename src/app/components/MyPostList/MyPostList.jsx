@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { NoteCard } from "../NoteCard/NoteCard";
@@ -50,9 +51,6 @@ export const MyPostList = () => {
 
   const postsData = posts?.data?.posts || [];
 
-  // ======================
-  // unique categories ber kora
-  // ======================
   const categories = useMemo(() => {
     const unique = [
       ...new Set(postsData.map((p) => p.category).filter(Boolean)),
@@ -60,24 +58,15 @@ export const MyPostList = () => {
     return unique;
   }, [postsData]);
 
-  // ======================
-  // active category diye filter kora
-  // ======================
   const filteredPosts =
     activeCategory === "all"
       ? postsData
       : postsData.filter((p) => p.category === activeCategory);
 
-  // ======================
-  // category change hole page reset
-  // ======================
   useEffect(() => {
     setPage(1);
   }, [activeCategory]);
 
-  // ======================
-  // client-side pagination
-  // ======================
   const total = filteredPosts.length;
   const totalPages = Math.max(Math.ceil(total / limit), 1);
 
