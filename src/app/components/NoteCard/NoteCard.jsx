@@ -63,11 +63,16 @@ const getCategoryStyle = (cat) =>
   CATEGORY_COLORS[cat] ||
   "bg-violet-500/15 text-violet-300 border-violet-500/30";
 
-export function NoteCard({ note, canAccess = false, onDeleted }) {
+export function NoteCard({
+  note,
+  canAccess = false,
+  onDeleted,
+  onNote = "post",
+}) {
   const [modalOpen, setModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
+  console.log(onNote, "this notess");
   const handleEdit = () => {
     setEditModalOpen(true);
   };
@@ -97,10 +102,11 @@ export function NoteCard({ note, canAccess = false, onDeleted }) {
       {/* DELETE MODAL */}
       {modalOpen && (
         <DeleteModal
-          deleteUrl={`/api/v1/post/delete/${deleteId}`}
-          title="Note"
+          deleteUrl={`/api/v1/${onNote}/delete/${deleteId}`}
+          title={onNote}
           onDeleted={handleDeleted}
           closeModal={closeDeleteModal}
+          onNote={onNote}
         />
       )}
 
@@ -110,6 +116,7 @@ export function NoteCard({ note, canAccess = false, onDeleted }) {
           note={note}
           closeModal={() => setEditModalOpen(false)}
           onUpdated={handleUpdated}
+          onNote={onNote}
         />
       )}
 

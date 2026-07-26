@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { NoteCard } from "../NoteCard/NoteCard";
@@ -165,7 +166,8 @@ export const MyNoteList = () => {
             key={post._id}
             note={post}
             canAccess={true}
-            onDeleted={() => setRefresh((r) => !r)} // 🔥 used for delete + edit
+            onDeleted={() => setRefresh((r) => !r)}
+            onNote="notes"
           />
         ))}
       </div>

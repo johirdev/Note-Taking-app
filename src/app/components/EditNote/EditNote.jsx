@@ -5,7 +5,7 @@ import config from "@/app/config/Config";
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
-export const EditNote = ({ note, closeModal, onUpdated }) => {
+export const EditNote = ({ note, closeModal, onUpdated, onNote = "post" }) => {
   const { token } = useContext(GlobalData);
 
   const [title, setTitle] = useState("");
@@ -27,7 +27,7 @@ export const EditNote = ({ note, closeModal, onUpdated }) => {
       setLoading(true);
 
       const response = await fetch(
-        `${config.API_URL}/api/v1/post/update/${note._id}`,
+        `${config.API_URL}/api/v1/${onNote}/update/${note._id}`,
         {
           method: "PATCH",
           headers: {
@@ -44,7 +44,7 @@ export const EditNote = ({ note, closeModal, onUpdated }) => {
       const data = await response.json();
 
       if (data.success) {
-        toast.success("Note updated successfully");
+        toast.success(`${onNote} updated successfully`);
         if (onUpdated) onUpdated(); // 🔥 refresh list
         closeModal();
       } else {

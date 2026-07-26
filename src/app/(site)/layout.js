@@ -32,7 +32,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="light" style={{ colorScheme: "light" }}>
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
       <body className={`  antialiased flex flex-col`}>
         <GlobalDataProvider>
           <div>
@@ -45,11 +45,8 @@ export default function RootLayout({ children }) {
                 background: "#0c0c14",
               }}
             >
-              {/* ── Sidebar ── */}
               <LeftSidebar />
               <div className="">{children}</div>
-
-              {/* ── Profile Panel ── */}
               <RightSidebar />
             </div>
           </div>

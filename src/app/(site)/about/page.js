@@ -34,7 +34,7 @@ const STACK = [
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-[#F3EFE4] dark:bg-[#12131a] px-6 py-14 flex justify-center transition-colors font-[var(--fallback-body)]">
+    <div className="min-h-screen bg-[#12131a] px-6 py-14 flex justify-center font-[var(--fallback-body)]">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
         .font-hand { font-family: 'Kalam', cursive; }
@@ -45,17 +45,9 @@ const AboutPage = () => {
             to bottom,
             transparent,
             transparent 31px,
-            rgba(47,75,124,0.08) 32px
-          );
-          background-position: 0 4px;
-        }
-        .dark .ruled-paper {
-          background-image: repeating-linear-gradient(
-            to bottom,
-            transparent,
-            transparent 31px,
             rgba(255,255,255,0.05) 32px
           );
+          background-position: 0 4px;
         }
         .torn-edge {
           clip-path: polygon(
@@ -68,7 +60,7 @@ const AboutPage = () => {
           );
         }
         .highlight {
-          background: linear-gradient(120deg, rgba(253,230,138,0.75) 0%, rgba(253,230,138,0.75) 100%);
+          background: linear-gradient(120deg, rgba(253,230,138,0.35) 0%, rgba(253,230,138,0.35) 100%);
           background-repeat: no-repeat;
           background-size: 100% 45%;
           background-position: 0 65%;
@@ -77,19 +69,19 @@ const AboutPage = () => {
 
       <div className="max-w-3xl w-full relative">
         {/* Notebook card */}
-        <div className="torn-edge ruled-paper bg-[#FDFBF4] dark:bg-[#1b1d29] shadow-xl pl-14 pr-8 sm:pr-10 pt-10 pb-8 transition-colors">
+        <div className="torn-edge ruled-paper bg-[#1b1d29] shadow-xl pl-14 pr-8 sm:pr-10 pt-10 pb-8">
           {/* Title */}
-          <h1 className="font-hand text-4xl sm:text-5xl font-bold text-[#EDEFF5] mb-1">
-            <span className="highlight px-1 dark:text-[#fff]">
+          <h1 className="font-hand text-4xl sm:text-5xl font-bold mb-1">
+            <span className="highlight px-1 text-[#fff]">
               Note&nbsp;Manager
             </span>
           </h1>
-          <p className="font-body text-sm uppercase tracking-[0.2em] text-[#8A8471] dark:text-[#7d81a0] mb-8">
+          <p className="font-body text-sm uppercase tracking-[0.2em] text-[#7d81a0] mb-8">
             page 01 — about this notebook
           </p>
 
           {/* Intro */}
-          <p className="font-body text-[#3f3b33] dark:text-[#c7cad8] leading-relaxed mb-10">
+          <p className="font-body text-[#c7cad8] leading-relaxed mb-10">
             Note Manager is a simple and powerful application designed to help
             you organize your thoughts, tasks, and ideas in one place. Whether
             you{"'"}re a student, developer, or professional, this app keeps
@@ -98,16 +90,16 @@ const AboutPage = () => {
 
           {/* Features */}
           <section className="mb-10">
-            <h2 className="font-hand text-2xl text-[#2F4B7C] dark:text-[#EDEFF5] mb-3">
+            <h2 className="font-hand text-2xl text-[#EDEFF5] mb-3">
               Key Features
             </h2>
             <ul className="space-y-2.5">
               {FEATURES.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 font-body text-[#3f3b33] dark:text-[#c7cad8]"
+                  className="flex items-start gap-3 font-body text-[#c7cad8]"
                 >
-                  <span className="mt-1 flex-shrink-0 w-4 h-4 rounded-sm border-2 border-[#2F4B7C]/50 dark:border-[#8b93c9]/60 flex items-center justify-center">
+                  <span className="mt-1 flex-shrink-0 w-4 h-4 rounded-sm border-2 border-[#8b93c9]/60 flex items-center justify-center">
                     <span className="w-2 h-2 rounded-[1px] bg-[#D6534F]/80" />
                   </span>
                   {item}
@@ -118,14 +110,14 @@ const AboutPage = () => {
 
           {/* Tech Stack */}
           <section className="mb-10">
-            <h2 className="font-hand text-2xl text-[#2F4B7C] dark:text-[#EDEFF5] mb-3">
+            <h2 className="font-hand text-2xl text-[#EDEFF5] mb-3">
               Tech Stack
             </h2>
             <div className="flex flex-wrap gap-2">
               {STACK.map((tech) => (
                 <span
                   key={tech}
-                  className="font-code text-xs px-2.5 py-1 rounded bg-[#2F4B7C]/[0.08] dark:bg-[#8b93c9]/15 text-[#2F4B7C] dark:text-[#c3c9ef] border border-[#2F4B7C]/15 dark:border-[#8b93c9]/20"
+                  className="font-code text-xs px-2.5 py-1 rounded bg-[#8b93c9]/15 text-[#c3c9ef] border border-[#8b93c9]/20"
                 >
                   {tech}
                 </span>
@@ -135,21 +127,21 @@ const AboutPage = () => {
 
           {/* Mission */}
           <section className="mb-10">
-            <h2 className="font-hand text-2xl text-[#2F4B7C] dark:text-[#EDEFF5] mb-3">
+            <h2 className="font-hand text-2xl text-[#EDEFF5] mb-3">
               Our Mission
             </h2>
-            <p className="font-body text-[#3f3b33] dark:text-[#c7cad8] leading-relaxed">
+            <p className="font-body text-[#c7cad8] leading-relaxed">
               Our goal is to make note-taking fast, simple, and distraction-free
               so users can focus more on ideas and less on managing them.
             </p>
           </section>
 
           {/* Footer — tear-off strip */}
-          <div className="pt-5 border-t-2 border-dashed border-[#c9c2ae] dark:border-[#3a3d4a] flex items-center justify-between">
-            <span className="font-code text-[11px] text-[#8A8471] dark:text-[#6a6e88]">
+          <div className="pt-5 border-t-2 border-dashed border-[#3a3d4a] flex items-center justify-between">
+            <span className="font-code text-[11px] text-[#6a6e88]">
               © {new Date().getFullYear()} Note Manager
             </span>
-            <span className="font-code text-[11px] text-[#8A8471] dark:text-[#6a6e88]">
+            <span className="font-code text-[11px] text-[#6a6e88]">
               all rights reserved
             </span>
           </div>

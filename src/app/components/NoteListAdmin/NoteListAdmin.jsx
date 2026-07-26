@@ -224,6 +224,7 @@ export default function NoteListAdmin() {
               note={post}
               canAccess={true}
               onDeleted={handleRefresh}
+              onNote="notes"
             />
           ))}
 

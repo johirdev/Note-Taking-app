@@ -30,18 +30,13 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F3EFE4] dark:bg-[#12131a] px-6 py-14 flex justify-center transition-colors">
+    <div className="min-h-screen bg-[#12131a] px-6 py-14 flex justify-center">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
         .font-hand { font-family: 'Kalam', cursive; }
         .font-body { font-family: 'Inter', sans-serif; }
         .font-code { font-family: 'JetBrains Mono', monospace; }
         .ruled-paper {
-          background-image: repeating-linear-gradient(
-            to bottom, transparent, transparent 31px, rgba(47,75,124,0.08) 32px
-          );
-        }
-        .dark .ruled-paper {
           background-image: repeating-linear-gradient(
             to bottom, transparent, transparent 31px, rgba(255,255,255,0.05) 32px
           );
@@ -57,7 +52,7 @@ const ContactPage = () => {
           );
         }
         .highlight {
-          background: linear-gradient(120deg, rgba(253,230,138,0.75) 0%, rgba(253,230,138,0.75) 100%);
+          background: linear-gradient(120deg, rgba(253,230,138,0.35) 0%, rgba(253,230,138,0.35) 100%);
           background-repeat: no-repeat;
           background-size: 100% 45%;
           background-position: 0 65%;
@@ -70,23 +65,23 @@ const ContactPage = () => {
       `}</style>
 
       <div className="max-w-2xl w-full relative">
-        <div className="torn-edge ruled-paper bg-[#FDFBF4] dark:bg-[#1b1d29] shadow-xl pl-14 pr-8 sm:pr-10 pt-10 pb-8 transition-colors relative">
+        <div className="torn-edge ruled-paper bg-[#1b1d29] shadow-xl pl-14 pr-8 sm:pr-10 pt-10 pb-8 relative">
           {/* Title */}
-          <h1 className="font-hand text-4xl sm:text-5xl font-bold text-[#EDEFF5] mb-1">
-            <span className="highlight px-1 d">Contact&nbsp;Us</span>
+          <h1 className="font-hand text-4xl sm:text-5xl font-bold mb-1">
+            <span className="highlight px-1 text-[#fff]">Contact&nbsp;Us</span>
           </h1>
-          <p className="font-body text-sm uppercase tracking-[0.2em] text-[#8A8471] dark:text-[#7d81a0] mb-8">
+          <p className="font-body text-sm uppercase tracking-[0.2em] text-[#7d81a0] mb-8">
             page 02 — leave us a note
           </p>
 
           {/* Description */}
-          <p className="font-body text-[#3f3b33] dark:text-[#c7cad8] leading-relaxed mb-8">
+          <p className="font-body text-[#c7cad8] leading-relaxed mb-8">
             Have a question, feedback, or issue? Feel free to reach out. We{"'"}
             re here to help you improve your experience with Note Manager.
           </p>
 
           {/* Contact Info */}
-          <div className="space-y-2 font-body text-[#3f3b33] dark:text-[#c7cad8] mb-10">
+          <div className="space-y-2 font-body text-[#c7cad8] mb-10">
             <p>
               📧 <span className="font-medium">Email:</span>{" "}
               johirulislam574206@gmail.com
@@ -102,15 +97,15 @@ const ContactPage = () => {
 
           {/* Form */}
           <section>
-            <h2 className="font-hand text-2xl text-[#2F4B7C] dark:text-[#EDEFF5] mb-4">
+            <h2 className="font-hand text-2xl text-[#EDEFF5] mb-4">
               Send us a message
             </h2>
 
             {status === "sent" ? (
-              <div className="pop-in flex flex-col items-center text-center gap-3 py-10 border-2 border-dashed border-[#2F4B7C]/25 dark:border-[#8b93c9]/25 rounded">
-                <div className="w-14 h-14 rounded-full bg-[#2F4B7C]/10 dark:bg-[#8b93c9]/15 flex items-center justify-center">
+              <div className="pop-in flex flex-col items-center text-center gap-3 py-10 border-2 border-dashed border-[#8b93c9]/25 rounded">
+                <div className="w-14 h-14 rounded-full bg-[#8b93c9]/15 flex items-center justify-center">
                   <svg
-                    className="w-7 h-7 text-[#2F4B7C] dark:text-[#c3c9ef]"
+                    className="w-7 h-7 text-[#c3c9ef]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -123,10 +118,10 @@ const ContactPage = () => {
                     />
                   </svg>
                 </div>
-                <p className="font-hand text-2xl text-[#2F4B7C] dark:text-[#EDEFF5]">
+                <p className="font-hand text-2xl text-[#EDEFF5]">
                   Message sent!
                 </p>
-                <p className="font-body text-sm text-[#8A8471] dark:text-[#9ba0c0]">
+                <p className="font-body text-sm text-[#9ba0c0]">
                   Thanks for reaching out — we{"'"}ll get back to you within
                   24–48 hours.
                 </p>
@@ -139,7 +134,7 @@ const ContactPage = () => {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Your Name"
-                  className="w-full border-b-2 border-[#c9c2ae] dark:border-[#3a3d4a] focus:border-[#2F4B7C] dark:focus:border-[#8b93c9] bg-transparent text-[#2f2b23] dark:text-[#e7e9f2] font-body py-2.5 px-1 outline-none transition-colors placeholder:text-[#8A8471]/70 dark:placeholder:text-[#7d81a0]/70"
+                  className="w-full border-b-2 border-[#3a3d4a] focus:border-[#8b93c9] bg-transparent text-[#e7e9f2] font-body py-2.5 px-1 outline-none transition-colors placeholder:text-[#7d81a0]/70"
                   required
                 />
                 <input
@@ -148,7 +143,7 @@ const ContactPage = () => {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="Your Email"
-                  className="w-full border-b-2 border-[#c9c2ae] dark:border-[#3a3d4a] focus:border-[#2F4B7C] dark:focus:border-[#8b93c9] bg-transparent text-[#2f2b23] dark:text-[#e7e9f2] font-body py-2.5 px-1 outline-none transition-colors placeholder:text-[#8A8471]/70 dark:placeholder:text-[#7d81a0]/70"
+                  className="w-full border-b-2 border-[#3a3d4a] focus:border-[#8b93c9] bg-transparent text-[#e7e9f2] font-body py-2.5 px-1 outline-none transition-colors placeholder:text-[#7d81a0]/70"
                   required
                 />
                 <textarea
@@ -157,14 +152,14 @@ const ContactPage = () => {
                   onChange={handleChange}
                   rows={5}
                   placeholder="Your Message"
-                  className="w-full border-b-2 border-[#c9c2ae] dark:border-[#3a3d4a] focus:border-[#2F4B7C] dark:focus:border-[#8b93c9] bg-transparent text-[#2f2b23] dark:text-[#e7e9f2] font-body py-2.5 px-1 outline-none transition-colors resize-none placeholder:text-[#8A8471]/70 dark:placeholder:text-[#7d81a0]/70"
+                  className="w-full border-b-2 border-[#3a3d4a] focus:border-[#8b93c9] bg-transparent text-[#e7e9f2] font-body py-2.5 px-1 outline-none transition-colors resize-none placeholder:text-[#7d81a0]/70"
                   required
                 />
 
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="w-full bg-[#2F4B7C] hover:bg-[#274069] disabled:opacity-60 text-[#FDFBF4] font-body font-medium py-3 rounded-lg transition-colors"
+                  className="w-full bg-[#2F4B7C] hover:bg-[#3a5c96] disabled:opacity-60 text-[#e7e9f2] font-body font-medium py-3 rounded-lg transition-colors"
                 >
                   {status === "sending" ? "Sending…" : "Send Message"}
                 </button>
@@ -173,7 +168,7 @@ const ContactPage = () => {
           </section>
 
           {/* Footer */}
-          <div className="pt-6 mt-8 border-t-2 border-dashed border-[#c9c2ae] dark:border-[#3a3d4a] font-code text-[11px] text-[#8A8471] dark:text-[#6a6e88] text-center">
+          <div className="pt-6 mt-8 border-t-2 border-dashed border-[#3a3d4a] font-code text-[11px] text-[#6a6e88] text-center">
             We usually respond within 24–48 hours.
           </div>
         </div>
