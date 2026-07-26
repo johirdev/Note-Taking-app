@@ -154,7 +154,7 @@ export default function Home() {
 
         {userData?.email ? (
           <Link
-            href={"/add-notes"}
+            href={"/add-posts"}
             style={{
               display: "flex",
               alignItems: "center",

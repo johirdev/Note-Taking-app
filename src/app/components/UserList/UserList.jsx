@@ -365,12 +365,24 @@ export default function UserList() {
                 {users.map((user) => (
                   <div
                     key={user._id}
-                    className="p-4 rounded-xl  relative border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                    className="p-4 rounded-xl relative border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   >
                     <div className="flex justify-between">
-                      <div>
-                        <h3 className="font-semibold">{user.name}</h3>
-                        <p className="text-xs text-white/60">{user.email}</p>
+                      <div className="flex items-center gap-3">
+                        {/* AVATAR */}
+                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-br from-violet-600 to-violet-800 flex items-center justify-center">
+                          <span className="text-sm font-semibold text-white uppercase">
+                            {user.name?.charAt(0) || "?"}
+                          </span>
+                        </div>
+
+                        <div>
+                          <h3 className="font-semibold">{user.name}</h3>
+                          <p className="text-xs text-white/60">{user.email}</p>
+                          <p className="text-xs p-[3px]  text-blue-400">
+                            role - {user.role}
+                          </p>
+                        </div>
                       </div>
 
                       <div className="flex gap-2 absolute right-4 top-2">
@@ -390,8 +402,7 @@ export default function UserList() {
                       </div>
                     </div>
 
-                    <div className="flex justify-between mt-2">
-                      <p className="text-xs">{user.role}</p>
+                    <div className="flex justify-end mt-2">
                       <p className="text-[11px] text-white/40">
                         {DateTimeBd(user.createdAt)}
                       </p>
