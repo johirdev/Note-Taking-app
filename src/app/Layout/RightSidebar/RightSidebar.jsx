@@ -5,8 +5,7 @@ import React, { useContext } from "react";
 
 export const RightSidebar = () => {
   const { token, userData, logOut } = useContext(GlobalData);
-  const INTERESTS = ["Chess", "Reading", "Coding", "Security", "MongoDB"];
-  const ACTIVITY = [40, 70, 30, 90, 55, 80, 45];
+
 
   return (
     <>
@@ -119,8 +118,8 @@ export const RightSidebar = () => {
                 }}
               >
                 {[
-                  ["24", "Notes"],
-                  ["3", "Pinned"],
+                  ["24", "Posts"],
+                  ["3", "Note"],
                   ["47", "Days"],
                 ].map(([n, l]) => (
                   <div
