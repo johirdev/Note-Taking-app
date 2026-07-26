@@ -4,7 +4,6 @@ import { createContext, useState, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { WindowLoading } from "../Shared/Loading/WindowLoading/WindowLoading";
-import MaintenancePage from "../Layout/Loading/Maintenance";
 
 export const GlobalData = createContext();
 
