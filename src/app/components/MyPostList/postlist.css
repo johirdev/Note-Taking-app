@@ -1,0 +1,33 @@
+/* ----scrollbar css ----*/
+.scrollbar_show {
+  scrollbar-width: thin !important;
+  scrollbar-color: transparent !important;
+}
+
+.scrollbar_show::-webkit-scrollbar {
+  width: 0.1px !important;
+}
+
+.scrollbar_show::-webkit-scrollbar-thumb {
+  background: transparent !important;
+}
+
+.scrollbar_show::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+.scrollbar_none {
+  scrollbar-width: none !important;
+  scrollbar-color: transparent !important;
+}
+
+.scrollbar_none::-webkit-scrollbar {
+  width: 1px !important;
+}
+
+.scrollbar_none::-webkit-scrollbar-thumb {
+  background: transparent !important;
+}
+
+.scrollbar_none::-webkit-scrollbar-track {
+  background: transparent !important;
+}

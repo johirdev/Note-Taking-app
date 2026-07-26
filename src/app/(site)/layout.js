@@ -1,5 +1,6 @@
 import { LeftSidebar } from "../Layout/LeftSidebar/LeftSidebar";
 import { RightSidebar } from "../Layout/RightSidebar/RightSidebar";
+import GlobalDataProvider from "./globalDataProvider";
 import "../globals.css";
 import { Toaster } from "sonner";
 
@@ -7,8 +8,8 @@ const currentYear = new Date().getFullYear();
 
 export const metadata = {
   title: {
-    default: `Note Taking App`,
-    template: "Note Taking App - %s",
+    default: `Note Taking Application`,
+    template: "Note Taking Application - %s",
   },
   description: ``,
   keywords: ``,
@@ -16,13 +17,13 @@ export const metadata = {
     title: ``,
     description: ``,
     url: "",
-    siteName: "Note Taking App",
+    siteName: "Note Taking Application",
     images: [
       {
         url: "",
         width: 600,
         height: 630,
-        alt: `Note Taking App ${currentYear}`,
+        alt: `Note Taking Application ${currentYear}`,
       },
     ],
     type: "website",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="light" style={{ colorScheme: "light" }}>
       <body className={`  antialiased flex flex-col`}>
+        <GlobalDataProvider>
           <div>
             <div
               className="max-width mx-auto"
@@ -43,12 +45,16 @@ export default function RootLayout({ children }) {
                 background: "#0c0c14",
               }}
             >
+              {/* ── Sidebar ── */}
               <LeftSidebar />
               <div className="">{children}</div>
+
+              {/* ── Profile Panel ── */}
               <RightSidebar />
             </div>
           </div>
           <Toaster richColors position="top-right" />
+        </GlobalDataProvider>
       </body>
     </html>
   );

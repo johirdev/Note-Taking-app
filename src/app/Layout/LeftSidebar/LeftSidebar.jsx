@@ -5,21 +5,6 @@ import React, { useContext, useState } from "react";
 
 export const LeftSidebar = () => {
   const { token, userData } = useContext(GlobalData);
-  const Icon = ({ d, size = 14 }) => (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d={d} />
-    </svg>
-  );
-
 
   const NAV_ITEMS = [
     {
@@ -48,6 +33,27 @@ export const LeftSidebar = () => {
   ];
   const NAV_ITEMS_USER = [
     {
+      label: "My Profile",
+      // badge: "0",
+      link: "/my-profile",
+      active: true,
+      iconD: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 8a7 7 0 0 1 14 0",
+    },
+    {
+      label: "Add Post",
+      badge: "new",
+      link: "/add-posts",
+      active: true,
+      iconD: "M12 5v14M5 12h14 M4 4h10l6 6v10a2 2 0 0 1-2 2H4z",
+    },
+    {
+      label: "Add Notes",
+      badge: "new",
+      link: "/add-notes",
+      active: true,
+      iconD: "M12 5v14M5 12h14 M4 4h10l6 6v10a2 2 0 0 1-2 2H4z",
+    },
+    {
       label: "My Note List",
       badge: "",
       link: "/my-note-list",
@@ -55,18 +61,11 @@ export const LeftSidebar = () => {
       iconD: "M4 4h16v16H4z M8 8h8M8 12h8M8 16h5",
     },
     {
-      label: "My Profile",
-      badge: "0",
-      link: "/my-profile",
-      active: true,
-      iconD: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 8a7 7 0 0 1 14 0",
-    },
-    {
-      label: "Add Notes",
-      badge: "01",
-      link: "/add-notes",
-      active: true,
-      iconD: "M12 5v14M5 12h14 M4 4h10l6 6v10a2 2 0 0 1-2 2H4z",
+      label: "My Post List",
+      badge: "",
+      link: "/my-post-list",
+      active: false,
+      iconD: "M4 4h16v16H4z M8 8h8M8 12h8M8 16h5",
     },
   ];
   const NAV_ITEMS_ADMIN = [
@@ -124,28 +123,21 @@ export const LeftSidebar = () => {
             borderBottom: "1px solid rgba(255,255,255,0.05)",
           }}
         >
-          <div
-            style={{
-              width: "30px",
-              height: "30px",
-              borderRadius: "8px",
-              background: "linear-gradient(135deg,#7c3aed,#a78bfa)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#fff",
-            }}
-          ></div>
-          <span
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "16px",
-              fontWeight: 700,
-              color: "#fff",
-            }}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-8 h-8 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.8}
           >
-            Note App
-          </span>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 12h6m-6 4h6M9 8h6M5 3.5h14A1.5 1.5 0 0 1 20.5 5v14a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V5A1.5 1.5 0 0 1 5 3.5Z"
+            />
+          </svg>
+          <span className="font-bold">Note App</span>
         </div>
 
         {/* Nav */}

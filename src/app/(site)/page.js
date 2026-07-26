@@ -1,11 +1,12 @@
 "use client";
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalData } from "./globalDataProvider";
 import config from "../config/Config";
 import { NoteCard } from "../components/NoteCard/NoteCard";
 import Link from "next/link";
 import "../components/MyNoteList/notelist.css";
+import Pagination from "../Layout/Pagination/Pagination";
 
 const PlusIcon = () => (
   <svg
@@ -44,35 +45,33 @@ export default function Home() {
   const [posts, setPosts] = useState({ meta: { total: 0 }, data: [] });
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
-  const observerRef = useRef(null);
-  const loadMoreRef = useRef(null);
+  const [limit, setLimit] = useState(10);
 
   // debounce search
   useEffect(() => {
     const t = setTimeout(() => {
       setDebouncedSearch(search);
       setPage(1);
-      setPosts({ meta: { total: 0 }, data: [] });
-      setHasMore(true);
     }, 450);
 
     return () => clearTimeout(t);
   }, [search]);
 
+  // reset to page 1 when limit changes
+  useEffect(() => {
+    setPage(1);
+  }, [limit]);
+
   // fetch posts
   useEffect(() => {
     const fetchPosts = async () => {
-     
-
       try {
         setLoading(true);
 
         const res = await fetch(
-          `${config.API_URL}/api/v1/notes?searchTerm=${encodeURIComponent(
+          `${config.API_URL}/api/v1/post?searchTerm=${encodeURIComponent(
             debouncedSearch,
-          )}&page=${page}&limit=8&sortBy=createdAt&sortOrder=desc`,
+          )}&page=${page}&limit=${limit}&sortBy=createdAt&sortOrder=desc`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -84,17 +83,7 @@ export default function Home() {
         const data = await res.json();
 
         if (data?.success) {
-          setPosts((prev) =>
-            page === 1
-              ? data
-              : {
-                  meta: data.meta || prev.meta,
-                  data: [...(prev.data || []), ...(data.data || [])],
-                },
-          );
-
-          // ✅ IMPORTANT FIX (limit = 8)
-          setHasMore((data.data?.length ?? 0) === 8);
+          setPosts(data);
         }
       } catch (err) {
         console.error("Fetch error:", err);
@@ -104,24 +93,17 @@ export default function Home() {
     };
 
     fetchPosts();
-  }, [ debouncedSearch, page]);
+  }, [debouncedSearch, page, limit]);
 
-  // infinite scroll (IntersectionObserver)
-  useEffect(() => {
-    if (loading) return;
+  const total = posts?.meta?.total || 0;
+  const totalPages = Math.max(1, Math.ceil(total / limit));
 
-    if (observerRef.current) observerRef.current.disconnect();
-
-    observerRef.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage((prev) => prev + 1);
-      }
-    });
-
-    if (loadMoreRef.current) {
-      observerRef.current.observe(loadMoreRef.current);
-    }
-  }, [loading, hasMore]);
+  const handlePageChange = (p) => {
+    setPage(p);
+    document
+      .querySelector(".scrollbar_none")
+      ?.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <main
@@ -169,49 +151,45 @@ export default function Home() {
             }}
           />
         </div>
-        {userData?.email ? (
-          <>
-            <Link
-              href={"/add-notes"}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "8px 16px",
-                borderRadius: "8px",
-                background: "linear-gradient(135deg,#7c3aed,#6d28d9)",
-                color: "#fff",
-                fontSize: "13px",
-                fontWeight: 600,
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <PlusIcon /> New Note
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link
-              href={"/login"}
-              className="bg-gradient-to-br from-violet-600 to-violet-800"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "8px 16px",
-                borderRadius: "8px",
 
-                color: "#fff",
-                fontSize: "13px",
-                fontWeight: 600,
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              Login
-            </Link>
-          </>
+        {userData?.email ? (
+          <Link
+            href={"/add-notes"}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "8px 16px",
+              borderRadius: "8px",
+              background: "linear-gradient(135deg,#7c3aed,#6d28d9)",
+              color: "#fff",
+              fontSize: "13px",
+              fontWeight: 600,
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <PlusIcon /> New Post
+          </Link>
+        ) : (
+          <Link
+            href={"/login"}
+            className="bg-gradient-to-br from-violet-600 to-violet-800"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "8px 16px",
+              borderRadius: "8px",
+              color: "#fff",
+              fontSize: "13px",
+              fontWeight: 600,
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Login
+          </Link>
         )}
       </div>
 
@@ -222,7 +200,7 @@ export default function Home() {
           padding: "20px 24px",
           overflowY: "auto",
         }}
-        className="scrollbar_none"
+        className="scrollbar_none min-h-[70vh]"
       >
         <div
           style={{
@@ -238,42 +216,42 @@ export default function Home() {
               color: "rgba(255,255,255,0.92)",
             }}
           >
-            Latest Notes
+            Latest Post
           </span>
 
           <span style={{ fontSize: "12px", color: "#a78bfa" }}>
-            {posts?.meta?.total || 0} notes →
+            {total} post
           </span>
         </div>
 
-        {/* NOTES */}
-        <div className="grid grid-cols-1 gap-3  scrollbar_none pb-20">
-          {posts?.data?.map((post) => (
-            <NoteCard key={post._id} note={post} canAccess={false} />
-          ))}
-
-          {/* LOADING SKELETON */}
-          {loading && (
-            <>
-              {[...Array(4)].map((_, i) => (
-                <div
-                  key={i}
-                  className="animate-pulse h-24 bg-gray-700 rounded"
-                />
-              ))}
-            </>
-          )}
-
-          {/* ENDLESS SCROLL TRIGGER */}
-          <div ref={loadMoreRef} style={{ height: "40px" }} />
-
-          {!loading && posts?.data?.length === 0 && (
+        {/* POST */}
+        <div className="grid grid-cols-1 gap-3 scrollbar_none pb-6 ">
+          {loading ? (
+            [...Array(Math.min(limit, 8))].map((_, i) => (
+              <div key={i} className="animate-pulse h-24 bg-gray-700 rounded" />
+            ))
+          ) : posts?.data?.length ? (
+            posts.data.map((post) => (
+              <NoteCard key={post._id} note={post} canAccess={false} />
+            ))
+          ) : (
             <p style={{ textAlign: "center", paddingTop: "20px" }}>
-              No notes found
+              No Post found
             </p>
           )}
         </div>
       </div>
+      {/* PAGINATION */}
+      {!loading && total > 0 && (
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          limit={limit}
+          onPageChange={handlePageChange}
+          onLimitChange={setLimit}
+          limitOptions={[1, 10, 20, 30, 50]}
+        />
+      )}
     </main>
   );
 }
